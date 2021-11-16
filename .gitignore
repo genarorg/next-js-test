@@ -19,7 +19,6 @@ e2e-results.xml
 /.next/
 /out/
 .next-fs-cache
-next.config.js
 
 # production
 /build
