@@ -24,7 +24,7 @@ rewrites: async () => [
 ]
 ```
 
-## Follow these steps:
+## To reproduce:
 
 1. Set your browser location to [path #2](http://localhost:3000/shop/specials/summer-sale) or using the link under 'Test links using anchor links' section on the homepage.
 2. Open a console and inspect the `query` object logs. You'll see that the catch-all route handles it for a brief moment before re-rendering using the dynamic route. This results in a flash of content.
@@ -33,9 +33,11 @@ rewrites: async () => [
 5. Repeat step #1
 6. Only the catch-all route is matched, with no flash of content.
 
-We have reviewed the documented [caveats](https://nextjs.org/docs/routing/dynamic-routes#caveats) section and client-side transitions work as described. 
+We have reviewed the documented [caveats](https://nextjs.org/docs/routing/dynamic-routes#caveats) section and client-side transitions work as described, but it is unclear how/why the dynamic route handles a path not specified by `getStaticPaths`since we are setting `fallback` to `false`. 
 
-It is unclear how/why the dynamic route handles a path not specified by `getStaticPaths`since we are setting `fallback` to `false`. Under this setup we would expect for **path #2** to be handled only by catch-all route, and **path #1** only by the dynamic route.
+## Expected Behavior
+1. Using rewrites should not affect routing behavior, no matter if we use client-side transitions or directly navigate to a path.
+2. Under this setup we would expect for **path #2** to be handled only by catch-all route, and **path #1** only by the dynamic route.
 
 
 
