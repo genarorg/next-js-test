@@ -6,13 +6,13 @@ type Props = {
   title: string
 }
 
-const Page: FC<Props> = ({ title }) => {
+const Product: FC<Props> = ({ title }) => {
   console.debug(useRouter()?.query)
 
   return (
     <>
       <h3>{title}</h3>
-      <p>Rendered using <b style={{color: 'blue'}}>[...page].tsx</b></p>
+      <p>Rendered using <b style={{color: 'green'}}>shop/[taxon]/[id].tsx</b></p>
     </>
   )
 }
@@ -20,7 +20,8 @@ const Page: FC<Props> = ({ title }) => {
 export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [{
     params: {
-      page: ['shop', 'specials', 'summer-sale'],
+      id: '48-green',
+      taxon: 'backpacks',
     }
   }],
   fallback: false
@@ -28,8 +29,8 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 
 export const getStaticProps: GetStaticProps = async ({ params }) => ({
   props: {
-    title: 'Save big on our Summer Sale!'
+    title: `Shop: ${params.id} / ${params.taxon}`
   }
 })
 
-export default Page
+export default Product
